@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	
+	<bean id="student" class="nri.fintech.Student">
+		<property name="Name" value="Mujeeb" />
+		<property name="engMarks" value="98" />
+		<property name="hindiMarks" value="70" />
+		<property name="MathsMarks" value="80" />
+	</bean> 
+
+	<bean id="beforeMethodBean" class="nri.fintech.BeforeMethod" />
+	<bean id="studentproxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="student" />
+		<property name="interceptorNames">
+			<list>
+				<value>beforeMethodBean</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="afterMethodBean" class="nri.fintech.AfterMethod" />
+	<bean id="studentproxy1"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="student" />
+		<property name="interceptorNames">
+			<list>
+				<value>afterMethodBean</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
